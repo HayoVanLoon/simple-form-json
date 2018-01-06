@@ -1,6 +1,6 @@
 "use strict";
 
-function simpleFormJson(formId, async) {
+function simpleFormJson(formId, forAsync) {
 
     function contains(xs, value) {
         for (var i = 0; i < xs.length; i += 1) {
@@ -81,7 +81,7 @@ function simpleFormJson(formId, async) {
         return acc;
     }
 
-    function replaceSubmit(formElem, async) {
+    function replaceSubmit(formElem) {
         formElem.addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -92,7 +92,7 @@ function simpleFormJson(formId, async) {
             hiddenJson.setAttribute('value', JSON.stringify(data));
             hiddenJson.setAttribute('name', 'data');
 
-            if (async) {
+            if (forAsync) {
                 formElem.append(hiddenJson);
             } else {
                 var synthForm = document.createElement('form');
@@ -108,11 +108,11 @@ function simpleFormJson(formId, async) {
     }
 
     if (formId) {
-        replaceSubmit(document.getElementById(formId), async);
+        replaceSubmit(document.getElementById(formId));
     } else {
         var elems = document.getElementsByTagName('form');
         for (var i = 0; i < elems.length; i += 1) {
-            replaceSubmit(elems[i], async);
+            replaceSubmit(elems[i]);
         }
     }
 }
