@@ -1,5 +1,15 @@
 "use strict";
 
+/**
+ * Replaces a form's default submit function with a function that harvests its
+ * fields and constructs a json. The basic meta-data is taken from the form and
+ * input attributes. Nested structure is determined through the html-classes
+ * 'json-object' and 'json-array'.
+ * @param formId    Id of form to modify (if undefined, all forms are treated)
+ * @param forAsync  If false (default), a new form containing the json is
+ * created and submitted. If set to true, adds a hidden field containing the
+ * json.
+ */
 function simpleFormJson(formId, forAsync) {
 
     function contains(xs, value) {
@@ -59,6 +69,11 @@ function simpleFormJson(formId, forAsync) {
         return arr;
     }
 
+    /**
+     * Recursively harvests the data.
+     * @param elem {{string}}      element containing the data
+     * @returns {{object}}
+     */
     function harvest(elem) {
         var acc = {};
 
