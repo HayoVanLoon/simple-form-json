@@ -79,6 +79,10 @@ function simpleFormJson(formId, forAsync) {
 
         if (elem.tagName === 'INPUT') {
             acc[elem.name] = harvestInputValue(elem);
+        } else if (elem.tagName === 'SELECT') {
+            // TODO
+        } else if (elem.tagName === 'TEXTAREA') {
+            // TODO
         } else if (isJsonObject(elem)) {
             acc[elem.id ? elem.id : '_object_without_id'] = harvestJsonObject(elem);
         } else if (isJsonArray(elem)) {
